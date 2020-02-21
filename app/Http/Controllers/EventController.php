@@ -46,6 +46,7 @@ class EventController extends Controller
             'description' => $request->get('description'),
         ]);
 
-        return Redirect::route('events.index');
+        return Redirect::route('events.index')
+            ->with('success', 'Event created!');
     }
 }

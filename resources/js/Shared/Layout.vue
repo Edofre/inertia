@@ -29,6 +29,13 @@
         <div class="container-fluid">
             <div class="row">
                 <main role="main" class="col-md-9 m-sm-auto col-lg-10 px-4">
+                    <div v-if="$page.flash.success" class="alert alert-success pt-3" role="alert">
+                        {{ $page.flash.success }}
+                    </div>
+                    <div v-if="$page.flash.error" class="alert alert-danger pt-3" role="alert">
+                        {{ $page.flash.error }}
+                    </div>
+
                     <slot></slot>
                 </main>
             </div>

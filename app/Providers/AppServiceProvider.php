@@ -37,14 +37,21 @@ class AppServiceProvider extends ServiceProvider
             return md5_file(public_path('mix-manifest.json'));
         });
 
-
         // Add validation errors to the view
         Inertia::share([
             'errors' => function () {
                 return Session::get('errors')
                     ? Session::get('errors')->getBag('default')->getMessages()
-                    : (object) [];
+                    : (object)[];
             },
         ]);
+
+        // Add flash messages
+        Inertia::share('flash', function () {
+            return [
+                'success' => Session::get('success'),
+                'error'   => Session::get('error'),
+            ];
+        });
     }
 }

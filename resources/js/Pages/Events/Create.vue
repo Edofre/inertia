@@ -10,6 +10,14 @@
         </div>
 
         <form @submit.prevent="submit">
+
+            <div v-if="$page.errors.name" class="alert alert-danger" role="alert">
+                {{ $page.errors.name[0] }}
+            </div>
+            <div v-if="$page.errors.description" class="alert alert-danger" role="alert">
+                {{ $page.errors.description[0] }}
+            </div>
+
             <div class="form-group">
                 <label for="name">Name</label>
                 <input
