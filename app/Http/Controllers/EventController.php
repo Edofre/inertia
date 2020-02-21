@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEventRequest;
+use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
@@ -35,12 +36,33 @@ class EventController extends Controller
     }
 
     /**
+     * @param Event $event
+     * @return Response
+     */
+    public function show(Event $event): Response
+    {
+        return Inertia::render('Events/Show', [
+            'event' => $event,
+        ]);
+    }
+
+    /**
+     * @param Event $event
+     * @return Response
+     */
+    public function edit(Event $event): Response
+    {
+        return Inertia::render('Events/Edit', [
+            'event' => $event,
+        ]);
+    }
+
+    /**
      * @param StoreEventRequest $request
      * @return RedirectResponse
      */
     public function store(StoreEventRequest $request): RedirectResponse
     {
-        // Notify user
         Event::create([
             'name'        => $request->get('name'),
             'description' => $request->get('description'),
@@ -48,5 +70,35 @@ class EventController extends Controller
 
         return Redirect::route('events.index')
             ->with('success', 'Event created!');
+    }
+
+
+    /**
+     * @param UpdateEventRequest $request
+     * @param Event              $event
+     * @return RedirectResponse
+     */
+    public function update(UpdateEventRequest $request, Event $event): RedirectResponse
+    {
+        $event->update([
+            'name'        => $request->get('name'),
+            'description' => $request->get('description'),
+        ]);
+
+        return Redirect::route('events.index')
+            ->with('success', 'Event updated!');
+    }
+
+    /**
+     * @param Event $event
+     * @return RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy(Event $event): RedirectResponse
+    {
+        $event->delete();
+
+        return Redirect::route('events.index')
+            ->with('success', 'Event deleted!');
     }
 }

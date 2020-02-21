@@ -19,7 +19,9 @@
                 </thead>
                 <tbody>
                     <tr v-for="event in events">
-                        <td>{{ event.id }}</td>
+                        <td>
+                            <inertia-link :href="$route('events.show', [event.id])">#{{ event.id }}</inertia-link>
+                        </td>
                         <td>{{ event.name }}</td>
                     </tr>
                 </tbody>
