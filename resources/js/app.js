@@ -29,12 +29,16 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 import { InertiaApp } from '@inertiajs/inertia-vue'
 import Vue from 'vue'
+import Vuelidate from 'vuelidate'
 
+// Inertia
 Vue.use(InertiaApp)
-
 const app = document.getElementById('app')
 
-// Use ziggy routes as $route
+// Vuelidate
+Vue.use(Vuelidate)
+
+// Ziggy
 Vue.prototype.$route = (...args) => route(...args).url()
 
 new Vue({

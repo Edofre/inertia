@@ -3,10 +3,6 @@
         <h1>{{ 'Dashboard' }}</h1>
         <p class="lead">
             {{ testing }}
-
-<!--            {{ $url_events_index }}-->
-
-            <inertia-link :href="$route('events.index')">Events</inertia-link>
         </p>
     </div>
 </template>
